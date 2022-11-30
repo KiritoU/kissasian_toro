@@ -612,13 +612,14 @@ class Helper:
 
     def get_links_from(self, soup: BeautifulSoup) -> str:
         try:
-            mutiserver = soup.find("div", class_="mutiserver")
+            # mutiserver = soup.find("div", class_="mutiserver")
+            mutiserver = soup.find("select", {"id": "selectServer"})
             options = mutiserver.find_all("option")
 
             return [option.get("value") for option in options]
         except Exception as e:
             self.error_log(
-                msg=f"Failed to get links from {soup}\n{e}",
+                msg=f"Failed to get links from {e}\n{soup}",
                 log_file="helper.get_links_from.log",
             )
             return []
